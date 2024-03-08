@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discuss Forum</title>
+    <!-- Daisy with Tailwind -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <!-- custom style -->
+    <style>
+      .font-mulish {
+        font-family: "Mulish", sans-serif;
+      }
+      .font-inter {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="font-mulish">
+    <!-- Header Section Start -->
+    <header class="container mx-auto">
+      <!-- nav part start -->
+      <nav class="flex justify-between my-12">
+        <h1 class="text-black text-4xl font-extrabold">
+          Discuss <span class="text-blue-600">Forum</span>
+        </h1>
+        <div class="flex md:gap-x-5 gap-x-3">
+          <div class="tooltip" data-tip="Home">
+            <img src="images/home.svg" alt="" />
+          </div>
+          <div class="tooltip" data-tip="Edit">
+            <img src="images/edit.svg" alt="" />
+          </div>
+          <div class="tooltip" data-tip="Add">
+            <img src="images/add.svg" alt="" />
+          </div>
+          <div class="tooltip" data-tip="Bookmark">
+            <img src="images/bookmark.svg" alt="" />
+          </div>
+          <button
+            class="btn bg-blue-500 hover:bg-blue-400 hover:text-black text-white px-6"
+          >
+            Sign In
+          </button>
+        </div>
+      </nav>
+      <!-- nav part end -->
+
+      <!-- banner part start -->
+      <section>
+        <div
+          class="md:p-28 p-14 bg-no-repeat bg-cover bg-center rounded-3xl lg:flex justify-between items-center"
+          style="background-image: url(images/banner.png)"
+        >
+          <!-- banner text -->
+          <div class="space-y-10">
+            <h1 class="md:text-7xl text-5xl text-white font-bold">
+              Welcome to the <br />
+              <span class="text-blue-600">DisCuss</span> Forum
+            </h1>
+            <p class="text-gray-400 md:text-xl text-base font-medium">
+              Connect, discuss, learn. Join our forum community for insightful
+              conversations <br />
+              and valuable networking opportunities.
+            </p>
+            <div class="join">
+              <div>
+                <div>
+                  <input
+                    id="search-field"
+                    class="input input-bordered join-item md:input-lg"
+                    placeholder="Search"
+                  />
+                </div>
+              </div>
+              <div class="indicator">
+                <button
+                  onclick="handleSearch()"
+                  class="btn bg-blue-500 hover:bg-blue-400 hover:text-black text-white px-6 md:btn-lg join-item"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- banner form -->
+          <div
+            class="bg-white md:p-12 p-6 rounded-xl md:rounded-3xl md:space-y-6 space-y-2 mt-5"
+          >
+            <div
+              class="flex justify-between text-lg md:text-2xl font-medium md:gap-x-28"
+            >
+              <p>Registered Users</p>
+              <p>01</p>
+            </div>
+            <div class="flex justify-between text-lg md:text-2xl font-medium">
+              <p>Forum</p>
+              <p>05</p>
+            </div>
+            <div class="flex justify-between text-lg md:text-2xl font-medium">
+              <p>Topics</p>
+              <p>10</p>
+            </div>
+            <div class="flex justify-between text-lg md:text-2xl font-medium">
+              <p>Replies</p>
+              <p>03</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- banner part end -->
+    </header>
+    <!-- Header Section End -->
+
+    <!-- skeleton -->
+    <section id="loading-skeleton" class="hidden">
+      <div class="container mx-auto flex flex-col items-center gap-4 w-full">
+        <div class="skeleton h-32 w-full"></div>
+        <div class="skeleton h-4 w-28"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-32 w-full"></div>
+      </div>
+    </section>
+    <!-- skelton -->
+
+    <!-- Main Section Start -->
+    <main class="container mx-auto">
+      <!-- discuss part -->
+      <section class="md:mt-24 mt-12 font-mulish">
+        <h3 class="text-black text-center md:text-5xl text-3xl font-black">
+          Let’s Discuss
+        </h3>
+        <p
+          class="text-gray-400 text-center font-inter text-lg max-w-3xl mx-auto my-8"
+        >
+          "Engage in dynamic conversations! Join our 'Let's Discuss' forum
+          section to share insights, explore diverse viewpoints, and delve into
+          intriguing topics with our vibrant community
+        </p>
+        <!-- discuss cards -->
+        <div
+          class="lg:flex lg:flex-row lg:justify-between flex flex-col-reverse gap-x-8"
+        >
+          <!-- left card -->
+          <div id="all-posts-container" class="flex flex-col gap-y-8"></div>
+          <!-- right card -->
+          <div class="rounded-3xl p-6 bg-[#7B7DFC1A] h-fit mb-6 lg:w-1/3">
+            <div>
+              <div class="flex justify-between">
+                <h6 class="text-xl font-bold">Title</h6>
+                <p class="font-inter text-gray-400">
+                  Mark as read <span>(0)</span>
+                </p>
+              </div>
+              <div
+                id="post-card-container"
+                class="bg-white rounded-xl p-3 mt-5 flex gap-10 flex-col"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- join forum part -->
+      <section class="md:my-24 my-12">
+        <div
+          class="p-14 md:p-28 bg-[#12132D] rounded-3xl md:flex justify-between items-center"
+        >
+          <div class="space-y-5 md:space-y-8 mb-5">
+            <h3 class="md:text-5xl text-3xl text-white font-black">
+              Join Our Forum
+            </h3>
+            <p
+              class="text-gray-400 md:text-lg text-base font-medium md:leading-8"
+            >
+              Engage with like-minded individuals, share insights, and expand
+              your knowledge. Join our vibrant forum community today to connect,
+              discuss, and learn together.
+            </p>
+            <button
+              class="btn bg-blue-500 hover:bg-blue-400 border-none hover:text-black text-white px-6 md:btn-lg"
+            >
+              Registered Now
+            </button>
+          </div>
+          <img src="images/joinforum.png" alt="" />
+        </div>
+      </section>
+
+      <!-- latest post part -->
+      <section class="font-mulish">
+        <h3 class="text-black text-center md:text-5xl text-3xl font-black">
+          Latest Posts
+        </h3>
+        <p
+          class="text-gray-400 text-center font-inter text-lg max-w-3xl mx-auto my-8"
+        >
+          Stay updated with the latest forum posts. Dive into diverse
+          discussions, share your thoughts, and explore fresh perspectives from
+          our active community.
+        </p>
+        <div
+          id="latest-posts-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        ></div>
+      </section>
+    </main>
+    <!-- Main Section End -->
+
+    <!-- Footer Part Start -->
+    <footer class="bg-[#F4F4F5] mt-12 md:mt-24 font-mulish py-12 md:py-24">
+      <div class="container mx-auto">
+        <div
+          class="flex flex-col items-center border-b-2 md:space-y-10 space-y-6 pb-10"
+        >
+          <img src="images/logo.png" alt="" />
+          <p class="text-gray-400 max-w-3xl text-center">
+            Connect, discuss, and learn with our vibrant forum community. Join
+            now to engage in insightful conversations and share your expertise!
+          </p>
+          <div class="flex gap-8">
+            <img src="images/twitter.png" alt="" />
+            <img src="images/facebook.png" alt="" />
+            <img src="images/instagram.png" alt="" />
+            <img src="images/github.png" alt="" />
+          </div>
+        </div>
+        <p class="text-gray-400 font-light text-center mt-9">
+          2017, All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+    <!-- Footer Part End -->
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
